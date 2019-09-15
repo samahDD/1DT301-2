@@ -35,7 +35,7 @@
 loop:
 
 ldi r17,0b00000000 ; loads the binary value to r16
-out DDRA,r16	   ; sets PORTA using DDRA as a input port using the binary value stored r16
+out DDRA,r17	   ; sets PORTA using DDRA as a input port using the binary value stored r16
 
 ldi r17, 0b11111111   ;loads the binary value to r16
 out DDRB,r17		; sets PORTB using DDRB as an output port using the binary value stored r16
