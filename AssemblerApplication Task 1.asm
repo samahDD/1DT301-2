@@ -1,7 +1,7 @@
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 ;   1DT301, Computer Technology I
 ;   Date: 2019-09-09
-;   Author: Andrei Neagu(an223kj)
+;   Author: Andrei Neagu (an223kj)
 ;           Konstantinos Tatsis (kt222iq)
 ;
 ;   Lab number:         1
