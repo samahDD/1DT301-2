@@ -34,13 +34,13 @@
 
 loop:
 
-ldi r17,0b00000000 ; loads the binary value to r16
-out DDRA,r17	   ; sets PORTA using DDRA as a input port using the binary value stored r16
+ldi r17,0b00000000 ; loads the binary value to 17
+out DDRA,r17	   ; sets PORTA using DDRA as a input port using the binary value stored r17
 
-ldi r17, 0b11111111   ;loads the binary value to r16
-out DDRB,r17		; sets PORTB using DDRB as an output port using the binary value stored r16
+ldi r17, 0b11111111   ;loads the binary value to 17
+out DDRB,r17		; sets PORTB using DDRB as an output port using the binary value stored r17
 
-in r17, PINA  ;loads the inputted pin address of port A to r16
-out PORTB,r17 ;outputs the value of r16 to P
+in r17, PINA  ;loads the inputted pin address of port A to r17
+out PORTB,r17 ;outputs the value of r17 to PORTB
 
 rjmp loop
