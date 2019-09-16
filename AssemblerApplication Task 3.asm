@@ -29,13 +29,13 @@
 ;<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
  .include "m2560def.inc"
 
-ldi r16, 0xFF ;value to set the DDRB as outputs
+ldi r16, 0b1111_1111 ;value to set the DDRB as outputs
 out DDRB, r16 ;sets PORTB using DDRB as a output port using the binary value stored r16
 
-ldi r16, 0x00 ;value to set the DDRA as inputs
+ldi r16, 0b0000_0000 ;value to set the DDRA as inputs
 out DDRA, r16 ;sets PORTA using DDRA as a input port using the binary value stored r16
 
-ldi r16, 0xFF ;turn off the leds
+ldi r16, 0b1111_1111 ;turn off the leds
 out portB, r16
 
 ldi r18, 0b1101_1111 ; when sw5 is pressed PINA5 is 0
@@ -44,7 +44,7 @@ ldi r19, 0b1111_1110 ;code for LED0
 loop:
 	in r17, PINA ; read PINA
 	cp r17, r18 ; compare r18 and r17
-	breq light ; if r17 equal to r18 go to light
+	breq equal ; if r17 equal to r18 go to light
 rjmp loop
 
-light: out portB, r19 ; turns on LED0
+equal: out portB, r19 ; turns on LED0
