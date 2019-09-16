@@ -34,29 +34,34 @@
  ldi R20, low(RAMEND)
  out SPL, R20
 
- ldi r16, 0xFF ;PORTB output
- out DDRB, r16
-
- ldi r17, 0b1111_1110 ;initial led state
- out PORTB, r17
+ start:
+ ldi r16, 0x0000_0001		;initial led state
+ out DDRB, R16				;initial output to LED0
+ rcall delay				;call delay of 500ms
+ 
 
  loop:
-	 out PORTB, r17 ; initial led state
-	 CALL Delay     ; delay of 0.5sec
-	 com r17        ; this instruction performs a one's complement of register Rd.
-	 LSL r17        ; shifts all bits in Rd one place to the left. Bit 0 is cleared
-	 com r17        ; one's complement again
-rjmp loop
+ lsl R16					;shift bits to the left
+ out DDRB, R16				;output of shifted value again
+ cpi R16, 0x00				;if r16 equals to 0x00 then restart loop 
+ breq again					;by going to again
+ rcall delay				;delay again
+ rjmp loop					;repeat if not equal to 0x00
 
-Delay:
-	 ldi r18, 21    ; 500ms delay achieved using calculator
-	 ldi r19, 140
-	 ldi r20, 174
-L1: dec r20
-	brne L1
-	dec r19
-	brne L1
-	dec r18
-	brne L1
-	rjmp PC+1
+ again:
+ rjmp start
+
+
+ delay:						;this delay is approx 500ms
+	ldi  r18, 5
+    ldi  r19, 15
+    ldi  r20, 242
+L1: dec  r20
+    brne L1
+    dec  r19
+    brne L1
+    dec  r18
+    brne L1
+
+   
 RET
