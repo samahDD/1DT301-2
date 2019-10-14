@@ -1,0 +1,42 @@
+; Task 4.asm
+; Created: 2019-10-12 14:38:08
+; Author : kt222iq
+; Replace with your application code
+.include "m2560def.inc"
+
+.org 0x00
+
+rjmp start
+
+.org 0x72
+
+start:
+
+ldi r20, 0xFF  			; Load immediately value "0xFF" to r20
+out DDRB, r20			; Set PORTB as output with the value of r20
+out PORTB, r20			; Output value of r20 to PORTB  
+	
+ldi r20, 12				; Store Prescaler value in UBRR1L
+sts UBRR1L, r20
+
+ldi r20, (1<<TXEN1) | (1<<RXEN1)	; Enable receiver and Transmitter
+sts UCSR1B, r20						; Set TXEN1 and RXC1 enable flags
+
+main:
+
+get_Character:			
+lds r20, UCSR1A			; read UCSR1A I/O register to r20
+sbrs r20, RXC1			; RXC1 = 1 new Char received
+rjmp get_Character		; RXC1 = 0 then no Char was received 	
+lds r15, UDR1			; Read char in UDR1
+
+com r15
+out PORTB, r15			; Write chars to PORTB
+com r15
+
+put_Character:
+lds r20, UCSR1A			; read UCSR1A I/O register to r20
+sbrs r20, UDRE1			; UDRE1 = 1 buffer is empty
+rjmp put_Character		; UDRE1 = 0 buffer is not empty
+sts UDR1, r15			; Write char to UDR1
+rjmp get_Character		; Jump back to loop
