@@ -1,9 +1,35 @@
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+; 1DT301, Computer Technology I
+; Date: 2019-10-12
+; Author:
+; Andrei Neagu
+; Konstantinos Tatsis
+;
+; Lab number: 3
+; Title: Timer and UART
+;
+; Hardware: STK600, CPU ATmega2560
+;
+; Function: Serial communication
+;
+; Input ports:
+;
+; Output ports: PORTB
+;
+; Subroutines: reset, main_loop, data_received_interrupt, buffer_empty_interrupt
+; led_output
+; Included files: m2560def.inc
+;
+; Other information:
+;
+; Changes in program: (Description and date)
+;<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 .include "m2560def.inc"
 
 .def temp = r16
 .def ledState = r17
 .def complement = r18
-.def dataReceived = r19     
+.def dataReceived = r19
 
 .equ TRANSFER_RATE = 12 	;1MHz, 4800 bps
 .equ TRUE = 0x01
