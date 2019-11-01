@@ -54,3 +54,4 @@ lds r15, UDR1			; Read char in UDR1
 com r15
 out PORTB, r15			; Write chars to PORTB
 com r15
+rjmp main
