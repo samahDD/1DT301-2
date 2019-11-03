@@ -10,9 +10,9 @@
 ;
 ; Hardware: STK600, CPU ATmega2560
 ;
-; Function: Square wave generator
+; Function: Square wave generator Task1
 ;
-; Input ports: 
+; Input ports:
 ;
 ; Output ports: PORTB
 ;
@@ -65,20 +65,20 @@ loop:
 timer0_int:
 	in temp, SREG	; save sreg in SP
 	push temp
-	
+
 	;set start value for timer so next interrupt occurs after 250 ms
-	ldi temp, 5	
+	ldi temp, 5
 	out TCNT0, temp
 	inc counter
 	cpi counter, 2 			; if counter is 2 then 0,5 sec have passed
 	breq led				; then branch to change_led_state
-	
+
 	rjmp again
-	
+
 	led:
 		com ledState 		; toggle LED0
 		clr counter			; reset counter to 0
-		
+
 	again:
 		pop temp			; save sreg in SP
 		out SREG, temp

@@ -10,9 +10,9 @@
 ;
 ; Hardware: STK600, CPU ATmega2560
 ;
-; Function: 
+; Function: Task2
 ;
-; Input ports: 
+; Input ports:
 ;
 ; Output ports: PORTB
 ;
@@ -53,7 +53,7 @@ start:
 
 	ldi temp, 0x01			;set DDRB as output
 	out DDRB, temp
-	
+
 	ldi ledState, 0x01
 	out PORTB, ledState		;light LED0
 
@@ -74,7 +74,7 @@ start:
 	sei						; enable global interrupt
 
 	clr counter
-	ldi ledCounter,10		
+	ldi ledCounter,10
 
 loop:
 	rjmp loop
@@ -85,7 +85,7 @@ increase:
 	inc ledCounter
 	retiInc:
 	reti
-		
+
 decrease:					;decreases ledcounter until it is 0
 	cpi ledCounter,0
 	breq retiDec
@@ -112,7 +112,7 @@ timer0_int:
 	turn_off:
 	ser temp			;turns off the led
 	out PORTB, temp
-	
+
 	end:				;when this is reached timer0e_int nds
 	cpi counter,20
 	brne again
@@ -123,5 +123,5 @@ timer0_int:
 	out SREG, temp
 	pop temp		 ; restore register
 
-		
+
 reti

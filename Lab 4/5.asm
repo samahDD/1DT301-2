@@ -10,7 +10,7 @@
 ;
 ; Hardware: STK600, CPU ATmega2560
 ;
-; Function: Serial communication
+; Function: Serial communication Task5
 ;
 ; Input ports:
 ;
