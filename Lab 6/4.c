@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 void init(void);
 void sendChar(char);
 void message(char*, char*, int);
@@ -13,38 +12,34 @@ char readFromTerminal();
 
 int main(void) {
 	init();
-	
+
 	readString();
 
 	return 0;
 }
-
-
 
 void readString() {
 	char chars[72];
 	for (int i = 0; i < 72; ++i) {
 		chars[i] = ' ';
 	}
-	
 
 	char temp[24];
 	int counter = 0;
 	while (1) {
 		// read a char
 		char c = readFromTerminal();
-		
+
 		if (c != 0xd) {
 			if (counter < 25) {
 				temp[counter] = c;
 				++counter;
 				continue;
 			}
-
 		}
 		// read the address
 		c = readFromTerminal();
-		
+
 		int lineNo = ((c - 0x30) - 1); // line number
 		if (lineNo < 0 || lineNo > 2) {
 			continue;
@@ -61,12 +56,9 @@ void readString() {
 			message("\rBO0001", chars + 48, 24);
 		}
 		message( "\rZD001", 0, 0);
-		
+
 		counter = 0;
-
 	}
-
-
 }
 
 char readFromTerminal() {
@@ -74,14 +66,11 @@ char readFromTerminal() {
 	return UDR1;
 }
 
-
-
 void init(void)	//enable rx and tx
 {
 	UBRR1L = 25;
 	UCSR1B = ((1 << RXEN1) | (1 << TXEN1));
 }
-
 
 void sendChar(char character)
 {
@@ -98,9 +87,8 @@ void message(char* command, char* string, int len) //send string to USART, must 
 	for (int i = 0; i < len; ++i) {
 		buffer[i + strlen(command)] = string[i];
 	}
-	int totalLen = strlen(command) + len; 
+	int totalLen = strlen(command) + len;
 	buffer[totalLen] = 0;
-
 
 	unsigned int checksum = 0;
 	for (int i = 0; i < totalLen; i++)
